@@ -10,7 +10,18 @@ pipeline {
     stage('Discord message') {
       steps {
         discordSend webhookURL: "${WEBHOOK_URL}",
-                    result: "Bonjour depuis Jenkins @everyone !" 
+                    result: currentBuild.currentResult,
+                    description: "Bonjour depuis Jenkins @everyone !" 
+      }
+    }
+    stage('Discord build message') {
+      steps{
+        discordSend webhookURL: DISCORD_WEBHOOK_URL,
+            title: "${env.JOB_BASE_NAME} #${env.BUILD_NUMBER}",
+            result: currentBuild.currentResult,
+            description: "**Build:** ${env.BUILD_NUMBER}\n**Status:** ${currentBuild.currentResult}\n\u2060", /* word joiner character forces a blank line */
+            enableArtifactsList: true,
+            showChangeset: true
       }
     }
   }
