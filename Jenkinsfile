@@ -9,7 +9,8 @@ pipeline {
   stages {
     stage('Discord message') {
       steps {
-        discordSend webhookURL: "${WEBHOOK_URL}" description: "Bonjour depuis Jenkins !"
+        discordSend webhookURL: "${WEBHOOK_URL}",
+                    description: "Bonjour depuis Jenkins !"
       }
     }
   }
