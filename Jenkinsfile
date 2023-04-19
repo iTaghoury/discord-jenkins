@@ -12,6 +12,7 @@ pipeline {
       steps {
         discordSend webhookURL: "${WEBHOOK_URL_MULESOFT_SERV}",
                     result: currentBuild.currentResult,
+                    customUsername: "Custom username test",
                     description: "Bonjour depuis Jenkins @everyone !" 
       }
     }
